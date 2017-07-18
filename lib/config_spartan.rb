@@ -55,6 +55,20 @@ class ConfigSpartan
       recursively_extend(mash)
     end
 
+    def require(*keys)
+      # raise method missing if key not present
+      # handles both symbols and strings
+      keys.each do |k|
+        self.send k
+      end
+      self
+    end
+
+    def permit(*keys)
+      # allows explicit key declaration
+      self
+    end
+
     def self.recursively_extend(object)
       case object
         when Array
